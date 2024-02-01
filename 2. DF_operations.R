@@ -77,4 +77,84 @@ mtcars[1]
 head(mtcars[c('mpg', 'cyl')])
 
 
+# adding rows: df2 as new row
+dfnew <- rbind(df, df2) 
+
+# adding columns -- by naming the new column directly
+# eg. df$new.col.name <- 2*df$col.name.1
+df$newcol <- 2*df$col.name.1
+
+# copy of that column 
+df$newcol.copy <- df$newcol
+df[, 'newcol.copy2'] <- df$newcol # or this way: the diff - the way the column is addressed
+
+# you call your column as though it's already on your df but give it a reassignment for new values 
+
+
+# setting column names
+colnames(df) # get the names of the columns in the df
+colnames(df) <- c('1', '2', '3', '4', '5') # rename columns all at once 
+
+# rename a single column by selecting the column number with []
+colnames(df)[1] <- 'NEW COL NAME' 
+# first column -- colnames(df)[1] -- integer, not character!
+
+
+# selecting multiple rows
+df[1:10, ]
+df[1:3, ]
+head(df, 7)
+
+df[-2, ] # select everything but the second row
+
+
+# conditional selection
+
+mtcars[ mtcars$mpg > 20, ] # DON'T FORGET THE COMMA 
+
+# in brackets: df$column.name > condition
+
+
+# filtering by 2 separate columns 
+mtcars[ mtcars$mpg > 20 & mtcars$cyl == 6, ]
+
+
+# THE TYPE OF FILTERING YOU'LL BE DOING ALL THE TIME WHEN IMPORTING DATA FROM A CSV -
+# to get an idea how it looks like, play around with it
+mtcars[mtcars$mpg > 20 & mtcars$cyl == 6, c('mpg', 'cyl', 'hp')] # select some columns 
+
+# another way without specifying the df everythin in the name of the column
+subset(mtcars, mpg > 20 & cyl == 6)
+
+
+mtcars[, c(1, 2, 3)] # columns 1, 2, 3
+mtcars[, c('mpg', 'cyl' )] # select by the names of the columns 
+
+
+# dealing with missing data
+
+# check if there are data points missing
+is.na(mtcars) # check in the df
+any(is.na(df)) # if there's any missing
+
+
+any(is.na(mtcars$mpg)) # anywhere in col
+
+# replace missing data
+df[is.na(df)] <- 0 # replace null values 
+
+
+# replace NAs with something else
+df[is.na(df)] <- 0 # works on whole df
+
+df$col[is.na(df$col)] <- 999 # For a selected column
+
+
+# delete selected missing data rows
+df <- df[ !is.na(df$col), ]
+
+
+# COMMON WAY OF DEALING WITH MISSING VALUES - IMPUTE THE MEAN OF THE COLUMN
+mtcars$mpg[ is.na(mtcars$mpg)] <- mean(mtcars$mpg) 
+
 
