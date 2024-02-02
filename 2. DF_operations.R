@@ -115,7 +115,7 @@ mtcars[ mtcars$mpg > 20, ] # DON'T FORGET THE COMMA
 # in brackets: df$column.name > condition
 
 
-# filtering by 2 separate columns 
+# filtering rows by 2 separate columns 
 mtcars[ mtcars$mpg > 20 & mtcars$cyl == 6, ]
 
 
@@ -156,5 +156,49 @@ df <- df[ !is.na(df$col), ]
 
 # COMMON WAY OF DEALING WITH MISSING VALUES - IMPUTE THE MEAN OF THE COLUMN
 mtcars$mpg[ is.na(mtcars$mpg)] <- mean(mtcars$mpg) 
+
+
+# exercises
+
+Name <- c("Sam","Frank","Amy")
+Age <- c(22,25,26)
+Weight <- c(150,165,120)
+Sex <- c("M", "M", "F")
+df <- data.frame (row.names = Name, Age, Weight, Sex)
+
+# naming the rows - another way
+rownames(df) <- c('sam', 'frank', 'amy')
+
+is.data.frame(mtcars)
+
+
+mat <- matrix(1:25,nrow = 5)
+
+as.data.frame(mat) # convert matrix to df
+
+# mean of a column values
+df <-  mtcars
+df$mpg # --> vector of the values
+mean(df$mpg)
+
+# all the rows, where column satisfies condition
+df[df$cyl == 6, ]
+
+subset(df, cyl == 6)
+
+# create a new column
+df$performance <- df$hp / df$wt
+
+
+df$performance <- round(df$performance, 2)
+
+# average mpg for cars that have more than 100 hp AND a wt value of more than 2.5
+mean(subset(df, hp > 100 & wt > 2.5)$mpg)
+
+df[df$hp > 100 & df$wt > 2.5, ]$mpg # --> vectors
+mean(df[df$hp > 100 & df$wt > 2.5, ]$mpg)
+
+df['Hornet Sportabout',]  # --> the row HS
+df['Hornet Sportabout',]$mpg  # the mpg of the Hornet Sportabout
 
 
