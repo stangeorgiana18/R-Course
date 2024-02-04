@@ -79,4 +79,14 @@ help(RPostgresSQL)
 # check our R-bloggers
 
 
+# WEB SCRAPING WITH R USING R VEST PACKAGE
+library(rvest)
+demo(package = 'rvest')
+
+# access demo
+demo(package = 'rvest', topic = 'tripadvisor')
+
+
+# review pipe operator %>%
+
 
