@@ -59,4 +59,24 @@ entire.workbook
 write_xlsx(mtcars, 'batai_de_cap.xlsx')
 
 
+# SQL - structure query language 
+# general strategy to connect R with SQL
+
+# steps: call the library, connect (pass in db name, userid, pass for the db), 
+# connection fetch (connect to the db and the to a table within it) and then ask
+# for a sequel query => query data (= dataframe), close the connection
+
+# independent research to make the connction
+# eg. r + postgresql
+
+install.packages('RPostgreSQL')
+library(RPostgreSQL) # load the librray
+help(RPostgresSQL)
+
+# search for the available documentation
+??RPostgresSQL
+
+# check our R-bloggers
+
+
 
