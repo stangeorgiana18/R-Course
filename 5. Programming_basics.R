@@ -182,8 +182,123 @@ print(stuff)
 
 # practice exercises
 
+num_check <- function(num, vec){
+  for (item in vec){
+    if (item == num){
+      return(TRUE)
+    }
+  }
+  return(FALSE)
+}
+
+print(num_check(2,c(1,2,3)))
+print(num_check(2,c(1,4,5)))
 
 
+num_count <- function(num, vec){
+  count <- 0
+  for (item in vec){
+    if (item == num){
+      count <- count + 1
+    }
+  }
+  return(count)
+}
+
+print(num_count(2,c(1,1,2,2,3,3)))
+print(num_count(1,c(1,1,2,2,3,1,4,5,5,2,2,1,3)))
 
 
+bar_count <- function(kg){
+  bars <- floor(kg / 5) + kg %% 5 
+  return(bars)
+}
 
+print(bar_count(6))
+print(bar_count(17))
+
+
+summer <- function(a, b, c){
+  sum <- a + b + c
+  if (a %% 3 == 0){
+    sum <- sum - a
+  }
+  if(b %% 3 == 0){
+    sum <- sum - b
+  }
+  if (c %% 3 == 0){
+    sum <- sum - c
+  }
+  return(sum)
+}
+
+print(summer(7,2,3))
+print(summer(3,6,9))
+print(summer(9,11,12))
+
+# OR:
+
+summer <- function(a, b, c){
+  out <- c(0)
+  
+  if (a %% 3 != 0){
+    out <- append(a,out)
+  }
+  if (b %% 3 != 0){
+    out <- append(b,out)
+  }
+  if (c %% 3 != 0){
+    out <- append(c,out)
+  }
+  return(sum(out))       
+}
+
+
+prime_check <- function(n){
+  if(n < 2){
+    return(FALSE)
+  }else{
+    i = 2
+    while(i * i <= n){
+      if( n %% i == 0 ){
+        return(FALSE)
+      }
+      i <- i + 1
+    }
+  }
+  return(TRUE)
+}
+
+print(prime_check(2))
+print(prime_check(5))
+print(prime_check(4))
+print(prime_check(237))
+print(prime_check(131))
+
+# OR:
+prime_check <- function(num) {
+  if (num == 2) {
+    return(TRUE)
+  } else if (any(num %% 2:(num-1) == 0)) {
+    return(FALSE)
+  } else { 
+    return(TRUE)
+  }
+}
+
+
+# Alternatively:
+prime_check <- function(num){
+  # Could put more checks for negative numbers etc...
+  if (num == 2) {
+    return(TRUE)
+  }
+  for (x in 2:(num-1)){
+    
+    if ((num%%x) == 0){
+      return(FALSE)
+    }
+  }
+  return(TRUE)
+  
+}
