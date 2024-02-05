@@ -120,5 +120,85 @@ print(add_choice(2, 10))
 sapply(v, add_choice, choice = 100)
 
 
+# Math functions with R
+
+# abs(): computes the absolute value.
+# sum(): returns the sum of all the values present in the input.
+# mean(): computes the arithmetic mean.
+# round(): rounds values (additional arguments to nearest)
+
+
+v <- c(-2, -3, 0, 4)
+abs(v)
+sum(v)
+mean(v)
+round(2.33211, digits = 2)
+round(2.377, 1)
+
+
+
+# Regular expressions -- pattern searching in a string / pattern of strings 
+# grepl --> returns a logical / boolean value
+# grep = general regular expression -- returns an index
+
+grepl('pattern', text)
+
+v <- c('a', 'b', 'c', 'd', 'd')
+grepl('b', v)
+
+grep('b', v) # index where it's true
+
+grep('a', c('b', 'a')) # -- 2 
+
+
+
+# Date and Timestamps
+
+Sys.Date() # today's date: [1] "2024-02-05"
+
+today <- Sys.Date()
+class(today) # -- "Date" object, not a character string
+
+# in data imported, dates are usually strings
+
+# convert to date object, the character is already in standard format
+c <- '2002-07-18'
+my.date <- as.Date(c)
+
+as.Date('Feb-02-2024') # error
+
+# convert the string into a date object
+my.date <- as.Date('Feb-02-24', format = "%b-%d-%y")
+
+my.date # -- standardized now: [1] "2024-02-02"
+
+# DATES
+#  %d  Day of the month (decimal number)
+#  %m  Month (decimal_number)
+#  %b  Month (abbreviated)
+#  %B  Month (full name)
+#  %y  Year (2 digit)
+#  %y  Year (4 digit)
+
+# useful for TIME SERIES ANALYSIS -- as.Date() in combination with the format argument 
+# to convert any string repres of a date to an actual date object
+
+as.Date('July, 18, 2002', format = "%B, %d, %Y") 
+# "2002-07-18"
+
+# portable operating system interface
+
+as.POSIXct("19:28:11", format = "%H:%M:%S")
+# [1] "2024-02-05 19:28:11 WET"
+
+# usually strptime is used!
+# strptime("date", format = "")
+
+help("strptime") # call help to construct the string
+strptime("19:40:19", format = "%H:%M:%S")  # "2024-02-05 19:40:19 WET"
+
+
+
+
 
 
