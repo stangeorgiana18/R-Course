@@ -38,15 +38,15 @@ df <- mtcars
 pl <- ggplot(data = df, aes(x = wt, y = mpg))
 
 # GEOMETRY
-# print(pl + geom_point(alpha = 0.5, size = 5))
+print(pl + geom_point(alpha = 0.5, size = 5))
 
 # size of the scatterplot points grow bigger as the hp values increase:
-# print(pl + geom_point(aes(size = hp)))
+print(pl + geom_point(aes(size = hp)))
 
-# sizing by factor - that feature is categorica, not a continuous spectrum:
-#print(pl + geom_point(aes(size = factor(cyl))))
+# sizing by factor - that feature is categorical, not a continuous spectrum:
+print(pl + geom_point(aes(size = factor(cyl))))
 
-#print(pl + geom_point(aes(shape = factor(cyl)), size = 5))
+print(pl + geom_point(aes(shape = factor(cyl)), size = 5))
 
 # !!!!!
 # for calling size, shape and we want them to be based off other features/columns of our data
@@ -179,5 +179,31 @@ print(pl + theme_fivethirtyeight())
 # you can even set your own themes for your own publications
 
 
+# exercises - plots
+
+library(ggplot2)
+library(ggthemes)
+head(mpg)
+
+# histogram -- frequency count
+pl <- ggplot(mpg, aes(x = hwy))
+pl2 <- pl + geom_histogram(bins = 20, color = 'pink', fill = 'pink', alpha = 0.5)
+print(pl2)
+
+
+# barplot
+pl <- ggplot(mpg, aes(x = manufacturer))
+pl2 <- pl + geom_bar(aes(fill = factor(cyl)))
+print(pl2)
+
+
+# scatterplot
+pl <- ggplot(txhousing, aes(x = sales, y = volume))
+pl2 <- pl + geom_point(alpha = 0.5, size = 1.5, color = 'blue')
+print(pl2)
+
+# Add a smooth fit line to the scatterplot from above
+pl3 <- pl2 + geom_smooth(color = 'red', method = "loess")
+print(pl3)
 
 
