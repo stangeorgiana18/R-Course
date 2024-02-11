@@ -207,3 +207,21 @@ pl3 <- pl2 + geom_smooth(color = 'red', method = "loess")
 print(pl3)
 
 
+
+# INTERACTIVE DATA VIZUALIZATIONS WITH PLOTLY
+ 
+install.packages('plotly')
+
+library(ggplot2)
+library(plotly)
+
+pl <- ggplot(mtcars, aes(mpg, wt)) + geom_point()
+
+gpl <- ggplotly(pl) # convert the ggplot into a ggplotly
+
+print(gpl)
+
+# https://plotly.com/ggplot2/
+
+
+
