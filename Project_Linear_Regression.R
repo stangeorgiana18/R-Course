@@ -87,6 +87,7 @@ print(summary(temp.model))
 # the intercept = the starting point of the prediction when all variables are zero, THE Y VALUE WHEN X = 0 - ESTIMATED RENTALS WHEN TEMP = 0
 # coefficient for temp = the impact of one-unit change in the temp on the predicted outcome
 # COEFFICIENT FOR TEMP = THE CHANGE IN Y / CHANGE IN X OR THE SLOPE
+# β1 would be negative if an increase in temperature was associated with a decrease in rentals
 
 # result: the model predicts 6.0462 bike rentals when the temperature is zero, and for each one-degree increase in temperature, the predicted number of bike rentals increases by 9.17
 
@@ -124,4 +125,39 @@ print(summary(model))
 
 
 
+# TRAIN/TEST SPLIT
+# not random split - 'future' data for test and 'previous' data for train
 
+bike$datetime <- as.Date(bike$datetime) # convert to date format
+bike <- bike[order(bike$datetime), ] # sort the df based on datetime column
+split.date <- as.Date("2012-07-01")
+
+train.data <- subset(bike, datetime < split.date)
+test.data <- subset(bike, datetime >= split.date)
+
+model <- lm(count ~ . - casual - registered - datetime - atemp, data = train.data)
+
+# PREDICTIONS
+bike.predictions <- predict(model, test.data)
+
+# create a df for each of the test data points
+results <- cbind(bike.predictions, test.data$count)
+colnames(results) <- c('predicted', 'actual')
+
+results <- as.data.frame(results)
+print(results)
+
+print('MSE: ')
+mse <- mean((results$actual - results$predicted)^2)
+print(mse) # high, which means low performance
+
+print('Squared Root of MSE: ')
+print(sqrt(mse)) # diff between predicted and actual counts ~ 198
+
+SSE <- sum((results$predicted - results$actual)^2)
+SST <- sum((mean(bike$count) - results$actual)^2)
+
+R2 <- 1 - SSE/SST
+print('R2')
+print(R2) # 0.2426 => 24.26% of the variability in the actual counts is explained by the model
+# low R-squared suggests that the model does not capture a significant portion of the variation in the data
