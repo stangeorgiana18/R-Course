@@ -35,4 +35,3 @@ pl <- clusplot(iris, iris.cluster$cluster, color = T, shade = T, labels = 0, lin
 print(pl)
 
 
-
